@@ -97,10 +97,20 @@ func (sm *SocketMessage) parseArgumentsList(arguments ...string) error {
 		if len(arguments) > 1 {
 			argumentsMap["filename"] = arguments[0]
 			argumentsMap["output-dir"] = arguments[1]
-			if len(arguments) == 3 {
+			if len(arguments) >= 3 {
 				argumentsMap["tenant"], err = strconv.Atoi(arguments[2])
 				if err != nil {
-					return &Error{Message: fmt.Sprintf("Tenant ID is not an intager: %s", arguments[2])}
+					return &Error{Message: fmt.Sprintf("Tenant ID is not an integer: %s", arguments[2])}
+				}
+			}
+			if len(arguments) == 5 {
+				argumentsMap["continuous"], err = strconv.ParseBool(arguments[3])
+				if err != nil {
+					return &Error{Message: fmt.Sprintf("continuous is not a bool: %s", arguments[2])}
+				}
+				argumentsMap["delete-when-done"], err = strconv.ParseBool(arguments[4])
+				if err != nil {
+					return &Error{Message: fmt.Sprintf("delete-when-done is not a bool: %s", arguments[2])}
 				}
 			}
 			break

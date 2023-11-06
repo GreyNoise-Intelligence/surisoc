@@ -3,7 +3,7 @@ A Go-lang package for interaction with the suricata command unix socket
 
 ## Installation
 - Have golang installed
-- >> go get github.com/Maxtors/suricon
+- >> go get github.com/GreyNoise-Intelligence/suricon
 
 ## Usage
 ```go
